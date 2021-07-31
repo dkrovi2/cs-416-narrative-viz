@@ -1,0 +1,4 @@
+[0m2021.07.31 14:36:01 INFO  Started: Metals version 0.10.5 in workspace '/Users/krovi/ms-cs/cs-416/cs-416-narrative-viz' for client Visual Studio Code 1.58.2.[0m
+[0m2021.07.31 14:36:05 INFO  time: initialize in 4.39s[0m
+[0m2021.07.31 14:36:10 WARN  Build server is not auto-connectable.[0m
+[0m2021.07.31 14:36:10 WARN  no build tool detected in workspace '/Users/krovi/ms-cs/cs-416/cs-416-narrative-viz'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
