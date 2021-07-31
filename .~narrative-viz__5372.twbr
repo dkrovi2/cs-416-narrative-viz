@@ -1,0 +1,729 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20211.21.0712.0907                               -->
+<workbook source-build='2021.1.4 (20211.21.0712.0907)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='covid_19_india-active' inline='true' name='federated.0o4cbg11vhc6b41f9vxxn1o9w9zz' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='narrative_viz_public_covid_19_active' name='textscan.1jgxv7e0r4rd4o18x3v0t003vohy'>
+            <connection class='textscan' directory='/Users/krovi/ms-cs/cs-416/cs-416-narrative-viz/csv' filename='narrative_viz_public_covid_19_active.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='narrative_viz_public_nifty_50_overall' name='textscan.0ysik3b0y3uef414yf5bs1e71tup'>
+            <connection class='textscan' directory='/Users/krovi/ms-cs/cs-416/cs-416-narrative-viz/csv' filename='narrative_viz_public_nifty_50_overall.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='narrative_viz_nifty_top_50_by_industry' name='textscan.0dzofug06g4r351edkmv91oip9je'>
+            <connection class='textscan' directory='/Users/krovi/ms-cs/cs-416/cs-416-narrative-viz/csv' filename='narrative_viz_nifty_top_50_by_industry.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.0dzofug06g4r351edkmv91oip9je' name='narrative_viz_nifty_top_50_by_industry.csv' table='[narrative_viz_nifty_top_50_by_industry#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='date' name='RecordDate' ordinal='0' />
+            <column datatype='string' name='Symbol' ordinal='1' />
+            <column datatype='string' name='Series' ordinal='2' />
+            <column datatype='real' name='Prev_Close' ordinal='3' />
+            <column datatype='real' name='Day_Open' ordinal='4' />
+            <column datatype='real' name='Day_High' ordinal='5' />
+            <column datatype='real' name='Day_Low' ordinal='6' />
+            <column datatype='real' name='Day_Last' ordinal='7' />
+            <column datatype='real' name='Day_Close' ordinal='8' />
+            <column datatype='real' name='VWAP' ordinal='9' />
+            <column datatype='integer' name='Volume' ordinal='10' />
+            <column datatype='real' name='Turnover' ordinal='11' />
+            <column datatype='integer' name='Trades' ordinal='12' />
+            <column datatype='integer' name='Deliverable_Volume' ordinal='13' />
+            <column datatype='real' name='Percent_Deliverable' ordinal='14' />
+            <column datatype='string' name='Industry' ordinal='15' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
+          <relation connection='textscan.1jgxv7e0r4rd4o18x3v0t003vohy' name='narrative_viz_public_covid_19_active.csv' table='[narrative_viz_public_covid_19_active#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='RecordDate' ordinal='0' />
+              <column datatype='integer' name='ActiveCaseCount' ordinal='1' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0ysik3b0y3uef414yf5bs1e71tup' name='narrative_viz_public_nifty_50_overall.csv' table='[narrative_viz_public_nifty_50_overall#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='RecordDate' ordinal='0' />
+              <column datatype='real' name='DayClose' ordinal='1' />
+              <column datatype='real' name='PercentChange' ordinal='2' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0dzofug06g4r351edkmv91oip9je' name='narrative_viz_nifty_top_50_by_industry.csv' table='[narrative_viz_nifty_top_50_by_industry#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='RecordDate' ordinal='0' />
+              <column datatype='string' name='Symbol' ordinal='1' />
+              <column datatype='string' name='Series' ordinal='2' />
+              <column datatype='real' name='Prev_Close' ordinal='3' />
+              <column datatype='real' name='Day_Open' ordinal='4' />
+              <column datatype='real' name='Day_High' ordinal='5' />
+              <column datatype='real' name='Day_Low' ordinal='6' />
+              <column datatype='real' name='Day_Last' ordinal='7' />
+              <column datatype='real' name='Day_Close' ordinal='8' />
+              <column datatype='real' name='VWAP' ordinal='9' />
+              <column datatype='integer' name='Volume' ordinal='10' />
+              <column datatype='real' name='Turnover' ordinal='11' />
+              <column datatype='integer' name='Trades' ordinal='12' />
+              <column datatype='integer' name='Deliverable_Volume' ordinal='13' />
+              <column datatype='real' name='Percent_Deliverable' ordinal='14' />
+              <column datatype='string' name='Industry' ordinal='15' />
+            </columns>
+          </relation>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <cols>
+          <map key='[ActiveCaseCount]' value='[narrative_viz_public_covid_19_active.csv].[ActiveCaseCount]' />
+          <map key='[DayClose]' value='[narrative_viz_public_nifty_50_overall.csv].[DayClose]' />
+          <map key='[Day_Close]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Day_Close]' />
+          <map key='[Day_High]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Day_High]' />
+          <map key='[Day_Last]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Day_Last]' />
+          <map key='[Day_Low]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Day_Low]' />
+          <map key='[Day_Open]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Day_Open]' />
+          <map key='[Deliverable_Volume]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Deliverable_Volume]' />
+          <map key='[Industry]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Industry]' />
+          <map key='[PercentChange]' value='[narrative_viz_public_nifty_50_overall.csv].[PercentChange]' />
+          <map key='[Percent_Deliverable]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Percent_Deliverable]' />
+          <map key='[Prev_Close]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Prev_Close]' />
+          <map key='[RecordDate (narrative_viz_nifty_top_50_by_industry.csv)]' value='[narrative_viz_nifty_top_50_by_industry.csv].[RecordDate]' />
+          <map key='[RecordDate (narrative_viz_public_nifty_50_overall.csv)]' value='[narrative_viz_public_nifty_50_overall.csv].[RecordDate]' />
+          <map key='[RecordDate]' value='[narrative_viz_public_covid_19_active.csv].[RecordDate]' />
+          <map key='[Series]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Series]' />
+          <map key='[Symbol]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Symbol]' />
+          <map key='[Trades]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Trades]' />
+          <map key='[Turnover]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Turnover]' />
+          <map key='[VWAP]' value='[narrative_viz_nifty_top_50_by_industry.csv].[VWAP]' />
+          <map key='[Volume]' value='[narrative_viz_nifty_top_50_by_industry.csv].[Volume]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[narrative_viz_public_covid_19_active.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[narrative_viz_public_nifty_50_overall.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RecordDate</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[RecordDate]</local-name>
+            <parent-name>[narrative_viz_public_covid_19_active.csv]</parent-name>
+            <remote-alias>RecordDate</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_public_covid_19_active.csv_2F6973E68FAF43C486D725E39D7E4E0E]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ActiveCaseCount</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ActiveCaseCount]</local-name>
+            <parent-name>[narrative_viz_public_covid_19_active.csv]</parent-name>
+            <remote-alias>ActiveCaseCount</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_public_covid_19_active.csv_2F6973E68FAF43C486D725E39D7E4E0E]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RecordDate</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[RecordDate (narrative_viz_public_nifty_50_overall.csv)]</local-name>
+            <parent-name>[narrative_viz_public_nifty_50_overall.csv]</parent-name>
+            <remote-alias>RecordDate</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_public_nifty_50_overall.csv_9AD2979DF3F346858BF0FD0994FFBEF0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>DayClose</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[DayClose]</local-name>
+            <parent-name>[narrative_viz_public_nifty_50_overall.csv]</parent-name>
+            <remote-alias>DayClose</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_public_nifty_50_overall.csv_9AD2979DF3F346858BF0FD0994FFBEF0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PercentChange</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PercentChange]</local-name>
+            <parent-name>[narrative_viz_public_nifty_50_overall.csv]</parent-name>
+            <remote-alias>PercentChange</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_public_nifty_50_overall.csv_9AD2979DF3F346858BF0FD0994FFBEF0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RecordDate</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[RecordDate (narrative_viz_nifty_top_50_by_industry.csv)]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>RecordDate</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Symbol</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Symbol]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Symbol</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Series</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Series]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Series</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Prev_Close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Prev_Close]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Prev_Close</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Day_Open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Day_Open]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Day_Open</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Day_High</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Day_High]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Day_High</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Day_Low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Day_Low]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Day_Low</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Day_Last</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Day_Last]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Day_Last</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Day_Close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Day_Close]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Day_Close</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>VWAP</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[VWAP]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>VWAP</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Volume</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Volume]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Volume</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Turnover</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Turnover]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Turnover</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Trades</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Trades]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Trades</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Deliverable_Volume</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Deliverable_Volume]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Deliverable_Volume</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Percent_Deliverable</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Percent_Deliverable]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Percent_Deliverable</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Industry</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Industry]</local-name>
+            <parent-name>[narrative_viz_nifty_top_50_by_industry.csv]</parent-name>
+            <remote-alias>Industry</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Day Close' datatype='real' name='[DayClose]' role='dimension' type='quantitative' />
+      <column caption='Day Close1' datatype='real' name='[Day_Close]' role='dimension' type='quantitative' />
+      <column caption='Day High' datatype='real' name='[Day_High]' role='dimension' type='quantitative' />
+      <column caption='Day Last' datatype='real' name='[Day_Last]' role='dimension' type='quantitative' />
+      <column caption='Day Low' datatype='real' name='[Day_Low]' role='dimension' type='quantitative' />
+      <column caption='Day Open' datatype='real' name='[Day_Open]' role='dimension' type='quantitative' />
+      <column caption='Deliverable Volume' datatype='integer' name='[Deliverable_Volume]' role='measure' type='quantitative' />
+      <column caption='Percent Change' datatype='real' name='[PercentChange]' role='measure' type='quantitative' />
+      <column caption='Percent Deliverable' datatype='real' name='[Percent_Deliverable]' role='measure' type='quantitative' />
+      <column caption='Prev Close' datatype='real' name='[Prev_Close]' role='measure' type='quantitative' />
+      <column caption='RecordDate (narrative viz nifty top 50 by industry.csv)' datatype='date' name='[RecordDate (narrative_viz_nifty_top_50_by_industry.csv)]' role='dimension' type='ordinal' />
+      <column caption='RecordDate (narrative viz public nifty 50 overall.csv)' datatype='date' name='[RecordDate (narrative_viz_public_nifty_50_overall.csv)]' role='dimension' type='ordinal' />
+      <column caption='Vwap' datatype='real' name='[VWAP]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='narrative_viz_nifty_top_50_by_industry.csv' datatype='table' name='[__tableau_internal_object_id__].[narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='narrative_viz_public_covid_19_active.csv' datatype='table' name='[__tableau_internal_object_id__].[narrative_viz_public_covid_19_active.csv_2F6973E68FAF43C486D725E39D7E4E0E]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='narrative_viz_public_nifty_50_overall.csv' datatype='table' name='[__tableau_internal_object_id__].[narrative_viz_public_nifty_50_overall.csv_9AD2979DF3F346858BF0FD0994FFBEF0]' role='measure' type='quantitative' />
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='narrative_viz_nifty_top_50_by_industry.csv' id='narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646'>
+            <properties context=''>
+              <relation connection='textscan.0dzofug06g4r351edkmv91oip9je' name='narrative_viz_nifty_top_50_by_industry.csv' table='[narrative_viz_nifty_top_50_by_industry#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='RecordDate' ordinal='0' />
+                  <column datatype='string' name='Symbol' ordinal='1' />
+                  <column datatype='string' name='Series' ordinal='2' />
+                  <column datatype='real' name='Prev_Close' ordinal='3' />
+                  <column datatype='real' name='Day_Open' ordinal='4' />
+                  <column datatype='real' name='Day_High' ordinal='5' />
+                  <column datatype='real' name='Day_Low' ordinal='6' />
+                  <column datatype='real' name='Day_Last' ordinal='7' />
+                  <column datatype='real' name='Day_Close' ordinal='8' />
+                  <column datatype='real' name='VWAP' ordinal='9' />
+                  <column datatype='integer' name='Volume' ordinal='10' />
+                  <column datatype='real' name='Turnover' ordinal='11' />
+                  <column datatype='integer' name='Trades' ordinal='12' />
+                  <column datatype='integer' name='Deliverable_Volume' ordinal='13' />
+                  <column datatype='real' name='Percent_Deliverable' ordinal='14' />
+                  <column datatype='string' name='Industry' ordinal='15' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='narrative_viz_public_covid_19_active.csv' id='narrative_viz_public_covid_19_active.csv_2F6973E68FAF43C486D725E39D7E4E0E'>
+            <properties context=''>
+              <relation connection='textscan.1jgxv7e0r4rd4o18x3v0t003vohy' name='narrative_viz_public_covid_19_active.csv' table='[narrative_viz_public_covid_19_active#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='RecordDate' ordinal='0' />
+                  <column datatype='integer' name='ActiveCaseCount' ordinal='1' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='narrative_viz_public_nifty_50_overall.csv' id='narrative_viz_public_nifty_50_overall.csv_9AD2979DF3F346858BF0FD0994FFBEF0'>
+            <properties context=''>
+              <relation connection='textscan.0ysik3b0y3uef414yf5bs1e71tup' name='narrative_viz_public_nifty_50_overall.csv' table='[narrative_viz_public_nifty_50_overall#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='RecordDate' ordinal='0' />
+                  <column datatype='real' name='DayClose' ordinal='1' />
+                  <column datatype='real' name='PercentChange' ordinal='2' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='[RecordDate (narrative_viz_public_nifty_50_overall.csv)]' />
+              <expression op='[RecordDate (narrative_viz_nifty_top_50_by_industry.csv)]' />
+            </expression>
+            <first-end-point object-id='narrative_viz_public_nifty_50_overall.csv_9AD2979DF3F346858BF0FD0994FFBEF0' />
+            <second-end-point object-id='narrative_viz_nifty_top_50_by_industry.csv_B0100094A61148C7806F94951999B646' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[RecordDate]' />
+              <expression op='[RecordDate (narrative_viz_public_nifty_50_overall.csv)]' />
+            </expression>
+            <first-end-point object-id='narrative_viz_public_covid_19_active.csv_2F6973E68FAF43C486D725E39D7E4E0E' />
+            <second-end-point object-id='narrative_viz_public_nifty_50_overall.csv_9AD2979DF3F346858BF0FD0994FFBEF0' />
+          </relationship>
+        </relationships>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Covid 19 Trajectory in India'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='covid_19_india-active' name='federated.0o4cbg11vhc6b41f9vxxn1o9w9zz' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0o4cbg11vhc6b41f9vxxn1o9w9zz'>
+            <column datatype='integer' name='[ActiveCaseCount]' role='measure' type='quantitative' />
+            <column datatype='date' name='[RecordDate]' role='dimension' type='ordinal' />
+            <column-instance column='[ActiveCaseCount]' derivation='Sum' name='[sum:ActiveCaseCount:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[RecordDate]' derivation='Day-Trunc' name='[tdy:RecordDate:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[sum:ActiveCaseCount:qk]</rows>
+        <cols>[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[tdy:RecordDate:qk]</cols>
+      </table>
+      <simple-id uuid='{AE5FCB65-1EDB-4B5C-9970-3DEFC63E2B65}' />
+    </worksheet>
+    <worksheet name='Nifty Volatility vs Trajectory'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='covid_19_india-active' name='federated.0o4cbg11vhc6b41f9vxxn1o9w9zz' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0o4cbg11vhc6b41f9vxxn1o9w9zz'>
+            <column datatype='integer' name='[ActiveCaseCount]' role='measure' type='quantitative' />
+            <column caption='Day Close' datatype='real' name='[DayClose]' role='dimension' type='quantitative' />
+            <column caption='Percent Change' datatype='real' name='[PercentChange]' role='measure' type='quantitative' />
+            <column datatype='date' name='[RecordDate]' role='dimension' type='ordinal' />
+            <column-instance column='[PercentChange]' derivation='Max' name='[max:PercentChange:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[DayClose]' derivation='None' name='[none:DayClose:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[ActiveCaseCount]' derivation='Sum' name='[sum:ActiveCaseCount:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[RecordDate]' derivation='Day-Trunc' name='[tdy:RecordDate:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Area' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='line-interpolation' value='linear' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[max:PercentChange:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Area' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='line-interpolation' value='linear' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[none:DayClose:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='line-interpolation' value='linear' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[sum:ActiveCaseCount:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='line-interpolation' value='linear' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[none:DayClose:qk] + ([federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[max:PercentChange:qk] + [federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[sum:ActiveCaseCount:qk]))</rows>
+        <cols>[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[tdy:RecordDate:qk]</cols>
+      </table>
+      <simple-id uuid='{325C6FE8-8D7C-4A43-9B70-DBC6EC50F1F1}' />
+    </worksheet>
+    <worksheet name='Sheet 3'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='covid_19_india-active' name='federated.0o4cbg11vhc6b41f9vxxn1o9w9zz' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0o4cbg11vhc6b41f9vxxn1o9w9zz'>
+            <column caption='Day Close1' datatype='real' name='[Day_Close]' role='dimension' type='quantitative' />
+            <column datatype='string' name='[Industry]' role='dimension' type='nominal' />
+            <column datatype='date' name='[RecordDate]' role='dimension' type='ordinal' />
+            <column-instance column='[Day_Close]' derivation='Median' name='[med:Day_Close:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Industry]' derivation='None' name='[none:Industry:nk]' pivot='key' type='nominal' />
+            <column-instance column='[RecordDate]' derivation='Day-Trunc' name='[tdy:RecordDate:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[none:Industry:nk]'>
+            <groupfilter function='member' level='[none:Industry:nk]' member='&quot;IT&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[none:Industry:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[none:Industry:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.60370165109634399' />
+                <format attr='mark-transparency' value='255' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[med:Day_Close:qk]</rows>
+        <cols>[federated.0o4cbg11vhc6b41f9vxxn1o9w9zz].[tdy:RecordDate:qk]</cols>
+      </table>
+      <simple-id uuid='{C685016B-4BA6-4CEF-938D-AD200A58CF17}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' name='Covid 19 Trajectory in India'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{597FA1EA-A660-4B39-A6A6-F9D4450DD39B}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Nifty Volatility vs Trajectory'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{87FD71DE-4528-4CAE-9C64-5457FBD5C338}' />
+    </window>
+    <window class='worksheet' name='Sheet 3'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{D7D6F114-4654-4E30-8310-85DD922720C7}' />
+    </window>
+  </windows>
+</workbook>
