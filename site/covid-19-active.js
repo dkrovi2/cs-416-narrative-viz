@@ -1,4 +1,4 @@
-var covid_19_data = [
+[
   {
     "RecordDate": "2020-01-30",
     "ActiveCaseCount": 1
