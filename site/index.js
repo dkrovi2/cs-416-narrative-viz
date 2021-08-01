@@ -39,31 +39,60 @@ function showScene(sceneId) {
   d3.select("#" + sceneId).style("display", "")
 }
 
-enablePageNav("page-nav-next")
-showScene("scene-0")
-activateLinkNav("scene-0-link")
+function moveTo(scene) {
+  switch(scene) {
+    case 0:
+      activateLinkNav("scene-0-link")
+      showScene("scene-0")
+      enablePageNav("page-nav-next")
+      d3.selectAll("#scene-0 > *").remove();
+      renderScene0()
+      break;
+    case 1:
+      activateLinkNav("scene-1-link")
+      showScene("scene-1")
+      enableAllPageNav()
+      d3.selectAll("#scene-1 > *").remove();
+      renderScene1()
+      break;
+    case 2:
+      activateLinkNav("scene-2-link")
+      showScene("scene-2")
+      disablePageNav("page-nav-next")
+      d3.selectAll("#scene-2 > *").remove();
+      renderScene2()
+      break;
+  }
+}
 
-d3.select("#page-nav-home").on("click", function (d) {
-  enablePageNav("page-nav-next")
-  showScene("scene-0")
-  activateLinkNav("scene-0-link")
+moveTo(current_scene)
+d3.select("#scene-0-link").on("click", function (d) {
   current_scene = 0;
+  moveTo(current_scene)
+});
+d3.select("#scene-1-link").on("click", function (d) {
+  current_scene = 1;
+  moveTo(current_scene)
+});
+d3.select("#scene-2-link").on("click", function (d) {
+  current_scene = 2;
+  moveTo(current_scene)
 });
 
+d3.select("#page-nav-home").on("click", function (d) {
+  current_scene = 0;
+  moveTo(current_scene)
+});
 
 d3.select("#page-nav-prev").on("click", function (d) {
   switch (current_scene) {
     case 1:
-      enablePageNav("page-nav-next")
-      showScene("scene-0")
-      activateLinkNav("scene-0-link")
       current_scene = 0;
-      break;
+      moveTo(current_scene)
+          break;
     case 2:
-      enableAllPageNav()
-      showScene("scene-1")
-      activateLinkNav("scene-1-link")
       current_scene = 1;
+      moveTo(current_scene)
       break;
   }
 });
@@ -72,16 +101,12 @@ d3.select("#page-nav-prev").on("click", function (d) {
 d3.select("#page-nav-next").on("click", function (d) {
   switch (current_scene) {
     case 0:
-      enableAllPageNav();
-      showScene("scene-1")
-      activateLinkNav("scene-1-link")
       current_scene = 1;
+      moveTo(current_scene)
       break;
     case 1:
-      disablePageNav("page-nav-next")
-      showScene("scene-2")
-      activateLinkNav("scene-2-link")
       current_scene = 2;
+      moveTo(current_scene)
       break;
   }
 });

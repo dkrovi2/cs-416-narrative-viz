@@ -31,8 +31,10 @@ function renderScene1() {
     .attr("transform",
       "translate(" + margin.left + "," + margin.top + ")");
 
+  var yValues = [1009976, 3645164, -2.504512144736555983];
+
   // Get the data
-  d3.json("covid-19-active.js").then(function (data) {
+  d3.json("covid-19-active.json").then(function (data) {
 
     d3.csv("nifty_50_overall.csv").then(function (data1) {
 
@@ -51,20 +53,6 @@ function renderScene1() {
       y.domain([0, d3.max(data, function (d) { return d.ActiveCaseCount; })]);
       x1.domain(d3.extent(data1, function (d) { return d.RecordDate; }));
       y1.domain(d3.extent(data1, function (d) { return d.PercentChange; }));
-
-      /*
-      scene1.append("path")
-        .data([data])
-        .attr("class", "line")
-        .style("stroke", "red")
-        .attr("d", valueLine);
-
-      scene1.append("path")
-        .data([data1])
-        .attr("class", "line")
-        .style("stroke", "#69b3a2")
-        .attr("d", valueLine1);
-      */
 
       // Add the x Axis
       scene1.append("g")
@@ -180,6 +168,45 @@ function renderScene1() {
         .style("text-anchor", "middle")
         .text("Nifty-50 Index Percent Change");
 
+      console.log(yValues);
+      var scene1Annotations = [
+        {
+          note: {
+            bgPadding: 10,
+            label: "Shutdown announced in US, UK and other major countries",
+            title: "Highly Volatile"
+          },
+          x: x1(parseTime("2020-03-17")),
+          y: y1(yValues[2]),
+          dx: 47,
+          dy: 40
+        },
+        {
+          note: {
+            bgPadding: 10,
+            label: "Post lifting the shutdown",
+            title: "First Wave"
+          },
+          x: x(parseTime("2020-09-17")),
+          y: y(yValues[0]),
+          dx: 47,
+          dy: 40
+        },
+        {
+          note: {
+            bgPadding: 10,
+            label: "Effect of mutants / variants",
+            title: "Second Wave"
+          },
+          x: x(parseTime("2021-05-07")),
+          y: y(yValues[1]),
+          dx: 47,
+          dy: 40
+        }
+      ]
+
+      const makeAnnotations = d3.annotation().annotations(scene1Annotations);
+      scene1.append("g").call(makeAnnotations);
     });
   });
 }
