@@ -1,4 +1,4 @@
-var symbols_by_industry = [
+[
   {
     "Industry": "AUTOMOBILE",
     "Symbols": [
@@ -13,7 +13,7 @@ var symbols_by_industry = [
   {
     "Industry": "CEMENT & CEMENT PRODUCTS",
     "Symbols": [
-      "GRASIM"
+      "GRASIM",
       "SHREECEM",
       "ULTRACEMCO"
     ]

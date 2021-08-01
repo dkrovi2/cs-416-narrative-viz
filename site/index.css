@@ -5,7 +5,7 @@
 }
 
 .axisGreen text {
-  fill: green;
+  fill: #69b3a2;
 }
 
 .axisRed text {
@@ -20,4 +20,8 @@
 
 .grid path {
   stroke-width: 0;
+}
+
+.bar {
+  fill: #69b3a2;
 }
