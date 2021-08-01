@@ -1,4 +1,4 @@
-function renderScene1() {
+function renderScene2() {
 
   // set the dimensions and margins of the graph
   var margin = { top: 20, right: 70, bottom: 100, left: 90 },
@@ -24,7 +24,7 @@ function renderScene1() {
     .x(function (d) { return x1(d.RecordDate); })
     .y(function (d) { return y1(d.PercentChange); });
 
-  var scene1 = d3.select("svg#scene-1")
+  var scene1 = d3.select("svg#scene-2")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -32,7 +32,7 @@ function renderScene1() {
       "translate(" + margin.left + "," + margin.top + ")");
 
   // Get the data
-  d3.json("covid-19-active.js").then(function (data) {
+  d3.json("covid-19-active.json").then(function (data) {
 
     d3.csv("nifty_50_overall.csv").then(function (data1) {
 
