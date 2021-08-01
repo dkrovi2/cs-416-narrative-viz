@@ -1,5 +1,5 @@
 var scenes = ["scene-0", "scene-1", "scene-2", "scene-3"];
-var current_scene = 0;
+var current_scene = 2;
 
 function activateLinkNav(linkId) {
   d3.select("#scene-0-link").attr("class", "nav-link")
@@ -33,12 +33,12 @@ function enableAllPageNav() {
 }
 
 function showScene(sceneId) {
-  d3.select("#scene-0").style("display", "none")
-  d3.select("#scene-1").style("display", "none")
-  d3.select("#scene-2").style("display", "none")
-  d3.select("#scene-3").style("display", "none")
+  d3.select("#div-scene-0").style("display", "none")
+  d3.select("#div-scene-1").style("display", "none")
+  d3.select("#div-scene-2").style("display", "none")
+  d3.select("#div-scene-3").style("display", "none")
 
-  d3.select("#" + sceneId).style("display", "")
+  d3.select("#div-" + sceneId).style("display", "")
 }
 
 function moveTo(scene) {

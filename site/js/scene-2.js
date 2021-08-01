@@ -1,7 +1,7 @@
 function renderScene2() {
 
   // set the dimensions and margins of the graph
-  var margin = { top: 20, right: 70, bottom: 100, left: 90 },
+  var margin = { top: 80, right: 70, bottom: 100, left: 90 },
     width = 960 - margin.left - margin.right,
     height = 650 - margin.top - margin.bottom;
   tooltip = { width: 100, height: 100, x: 10, y: -30 };
@@ -135,7 +135,7 @@ function renderScene2() {
         .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
         .attr("stroke-dashoffset", totalLength[0])
         .transition()
-        .duration(5000)
+        .duration(3000)
         .ease(d3.easeLinear)
         .style("stroke", animationData[0].stroke)
         .attr("stroke-dashoffset", 0);
@@ -144,7 +144,7 @@ function renderScene2() {
         .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1])
         .attr("stroke-dashoffset", totalLength[1])
         .transition()
-        .duration(5000)
+        .duration(3000)
         .ease(d3.easeLinear)
         .style("stroke", animationData[1].stroke)
         .attr("stroke-dashoffset", 0);
@@ -188,8 +188,8 @@ function renderScene2() {
             },
             x: x(parseTime("2020-09-17")),
             y: y(yValues[0]),
-            dx: -47,
-            dy: 40
+            dx: 47,
+            dy: -40
           },
           {
             note: {
@@ -199,8 +199,8 @@ function renderScene2() {
             },
             x: x(parseTime("2021-05-07")),
             y: y(yValues[1]),
-            dx: -47,
-            dy: 40
+            dx: -27,
+            dy: -20
           }
         ]
   

@@ -135,7 +135,7 @@ function renderScene1() {
         .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
         .attr("stroke-dashoffset", totalLength[0])
         .transition()
-        .duration(5000)
+        .duration(3000)
         .ease(d3.easeLinear)
         .style("stroke", animationData[0].stroke)
         .attr("stroke-dashoffset", 0);
@@ -144,7 +144,7 @@ function renderScene1() {
         .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1])
         .attr("stroke-dashoffset", totalLength[1])
         .transition()
-        .duration(5000)
+        .duration(3000)
         .ease(d3.easeLinear)
         .style("stroke", animationData[1].stroke)
         .attr("stroke-dashoffset", 0);

@@ -80,7 +80,7 @@ function renderScene0() {
 
     svg.selectAll("rect")
       .transition()
-      .duration(800)
+      .duration(1000)
       .attr("y", function (d) { return y(d.SymbolsCount); })
       .attr("height", function (d) { return height - y(d.SymbolsCount); })
       .delay(function (d, i) { return (i * 100) })

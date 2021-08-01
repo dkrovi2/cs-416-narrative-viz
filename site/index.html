@@ -69,6 +69,18 @@
       <svg id="scene-2"></svg>
     </div>
     <div id="div-scene-3" style="display: none;">
+      <form class="row g-3">
+        <div class="col-md-6">
+          <label for="labelForIndustries" class="form-label"><b>Industry</b></label>
+          <select class="form-control" id="industries">
+            
+          </select>
+      </div>
+        <div class="col-md-6">
+          <label for="labelForSymbols" class="form-label"><b>Symbol</b></label>
+          <select class="form-control" id="symbols"></select>
+        </div>
+      </form>
       <svg id="scene-3"></svg>
     </div>
 
@@ -128,7 +140,7 @@
     renderScene0();
     renderScene1();
     renderScene2();
-    renderScene3();
+    initScene3();
   </script>
 </body>
 
