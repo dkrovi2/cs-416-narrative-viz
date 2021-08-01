@@ -8,11 +8,11 @@ function renderScene2() {
 
   // parse the date / time
   var parseTime = d3.timeParse("%Y-%m-%d");
-  var formatTime = d3.timeFormat("%e %B");
+  var formatTime = d3.timeFormat("%d");
+  var tooltipFormatTime = d3.timeFormat("%Y-%m-%d");
 
   // set the ranges
   var x = d3.scaleTime().range([0, width]);
-
   var y = d3.scaleLinear().range([height, 0]);
   var valueLine = d3.line()
     .x(function (d) { return x(d.RecordDate); })
@@ -24,7 +24,7 @@ function renderScene2() {
     .x(function (d) { return x1(d.RecordDate); })
     .y(function (d) { return y1(d.DayClose); });
 
-  var scene1 = d3.select("svg#scene-2")
+  var scene2 = d3.select("svg#scene-2")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -55,7 +55,7 @@ function renderScene2() {
       y1.domain(d3.extent(data1, function (d) { return d.DayClose; }));
 
       // Add the x Axis
-      scene1.append("g")
+      scene2.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x)
           .ticks(d3.timeDay.filter(d => d3.timeDay.count(0, d) % 30 === 0))
@@ -66,14 +66,14 @@ function renderScene2() {
         .attr("dy", ".15em")
         .attr("transform", "rotate(-65)");
 
-      scene1.append("text")
+      scene2.append("text")
         .attr("transform",
           "translate(" + (width / 2) + " ," +
           (height + margin.top + 50) + ")")
         .style("text-anchor", "middle")
         .text("Month");
 
-      scene1.append("text")
+      scene2.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left)
         .attr("x", 0 - (height / 2))
@@ -83,11 +83,11 @@ function renderScene2() {
 
 
       // Add the ActiveCaseCount Y Axis
-      scene1.append("g")
+      scene2.append("g")
         .attr("class", "axisRed")
         .call(d3.axisLeft(y));
 
-      scene1.append("line")
+      scene2.append("line")
         .attr(
           {
             "class": "horizontalGrid",
@@ -115,13 +115,13 @@ function renderScene2() {
         stroke: "#69b3a2"
       }
 
-      scene1
+      scene2
         .selectAll(".plot-axis")
         .data(animationData)
         .enter().append("g")
         .attr("class", "plot-axis");
 
-      var path = scene1
+      var path = scene2
         .selectAll(".plot-axis").append("path")
         .attr("class", "line")
         .attr("d", function (d) { return d.fn(d.data); });
@@ -149,64 +149,148 @@ function renderScene2() {
         .style("stroke", animationData[1].stroke)
         .attr("stroke-dashoffset", 0);
 
-      // Add the PercentChange Y1 Axis
-      scene1.append("g")
+      scene2.append("g")
         .attr("class", "axisGreen")
         .attr("transform", "translate( " + width + ", 0 )")
         .call(d3.axisRight(y1));
 
-      scene1
+      scene2
         .append("g")
         .attr("class", "grid")
         .call(d3.axisLeft(y1).tickSize(-width).tickFormat(""));
 
-      scene1.append("text")
+      scene2.append("text")
         .attr("transform", "rotate(270)")
         .attr("y", width + (margin.right / 2))
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .text("Nifty-50 Index Percent Change");
+        .text("Nifty-50 Index Daily Close");
 
-        var scene1Annotations = [
-          {
-            note: {
-              bgPadding: 10,
-              label: "Due to shutdown announced in US, UK and other major countries",
-              title: "Sharp Drop"
-            },
-            x: x1(parseTime("2020-04-03")),
-            y: y1(yValues[2]),
-            dx: -47,
-            dy: -40
+      var scene2Annotations = [
+        {
+          note: {
+            bgPadding: 10,
+            label: "Due to shutdown announced in US, UK and other major countries",
+            title: "Sharp Drop"
           },
-          {
-            note: {
-              bgPadding: 10,
-              label: "After lifting the country-wide shutdown",
-              title: "First Wave"
-            },
-            x: x(parseTime("2020-09-17")),
-            y: y(yValues[0]),
-            dx: 47,
-            dy: -40
+          x: x1(parseTime("2020-04-03")),
+          y: y1(yValues[2]),
+          dx: -47,
+          dy: -40
+        },
+        {
+          note: {
+            bgPadding: 10,
+            label: "After lifting the country-wide shutdown",
+            title: "First Wave"
           },
-          {
-            note: {
-              bgPadding: 10,
-              label: "Due to the effect of mutants / variants",
-              title: "Second Wave"
-            },
-            x: x(parseTime("2021-05-07")),
-            y: y(yValues[1]),
-            dx: -27,
-            dy: -20
-          }
-        ]
-  
-        const makeAnnotations = d3.annotation().annotations(scene1Annotations);
-        scene1.append("g").call(makeAnnotations);
-  
-      });
+          x: x(parseTime("2020-09-17")),
+          y: y(yValues[0]),
+          dx: 47,
+          dy: -40
+        },
+        {
+          note: {
+            bgPadding: 10,
+            label: "Due to the effect of mutants / variants",
+            title: "Second Wave"
+          },
+          x: x(parseTime("2021-05-07")),
+          y: y(yValues[1]),
+          dx: -27,
+          dy: -20
+        }
+      ]
+
+      const makeAnnotations = d3.annotation().annotations(scene2Annotations);
+      scene2.append("g").call(makeAnnotations);
+
+      var dcTooltip = d3.select("#div-scene2-dc-tooltip")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+      var dcMouseover = function (event, d) {
+        dcTooltip.style("opacity", 1)
+      }
+
+      var dcMousemove = function (event, d) {
+        dcTooltip
+          .html("Index Close Price on " + tooltipFormatTime(d.RecordDate) + " is " + d.DayClose)
+          .style("left", (event.x) / 2 + 90 + "px")
+          .style("top", (event.y) / 2 + "px")
+      }
+
+      var dcMouseleave = function (d) {
+        dcTooltip
+          .transition()
+          .duration(200)
+          .style("opacity", 0)
+      }
+      scene2
+        .append("g")
+        .selectAll("dot")
+        .data(animationData[1].data.filter(function (d, i) {
+          var day = formatTime(d.RecordDate)
+          return (day % 5 == 0)
+        }))
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return x1(d.RecordDate); })
+        .attr("cy", function (d) { return y1(d.DayClose); })
+        .attr("r", "5")
+        .style("fill", "#69b3a2")
+        .style("opacity", 0.3)
+        .style("stroke", "white")
+        .on("mouseover", dcMouseover)
+        .on("mousemove", dcMousemove)
+        .on("mouseleave", dcMouseleave);
+
+      var acTooltip = d3.select("#div-scene2-ac-tooltip")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+      var acMouseover = function (event, d) {
+        acTooltip.style("opacity", 1)
+      }
+
+      var acMousemove = function (event, d) {
+        acTooltip
+          .html(d.ActiveCaseCount + ": Active Cases on " + tooltipFormatTime(d.RecordDate))
+          .style("left", (event.x) / 2 + 90 + "px")
+          .style("top", (event.y) / 2 + "px")
+      }
+
+      var acMouseleave = function (d) {
+        acTooltip.transition().duration(200).style("opacity", 0)
+      }
+      scene2
+        .append("g")
+        .selectAll("dot")
+        .data(animationData[0].data.filter(function (d, i) {
+          var day = formatTime(d.RecordDate)
+          return (day % 5 == 0)
+        }))
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return x(d.RecordDate); })
+        .attr("cy", function (d) { return y(d.ActiveCaseCount); })
+        .attr("r", "5")
+        .style("fill", "red")
+        .style("opacity", 0.3)
+        .style("stroke", "white")
+        .on("mouseover", acMouseover)
+        .on("mousemove", acMousemove)
+        .on("mouseleave", acMouseleave);
+
+    });
   });
 }

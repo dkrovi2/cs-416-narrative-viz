@@ -8,7 +8,8 @@ function renderScene1() {
 
   // parse the date / time
   var parseTime = d3.timeParse("%Y-%m-%d");
-  var formatTime = d3.timeFormat("%e %B");
+  var formatTime = d3.timeFormat("%d");
+  var tooltipFormatTime = d3.timeFormat("%Y-%m-%d");
 
   // set the ranges
   var x = d3.scaleTime().range([0, width]);
@@ -140,6 +141,7 @@ function renderScene1() {
         .style("stroke", animationData[0].stroke)
         .attr("stroke-dashoffset", 0);
 
+
       d3.select(path._groups[0][1])
         .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1])
         .attr("stroke-dashoffset", totalLength[1])
@@ -168,6 +170,92 @@ function renderScene1() {
         .style("text-anchor", "middle")
         .text("Nifty-50 Index Percent Change");
 
+      var pcTooltip = d3.select("#div-scene1-pc-tooltip")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+      var pcMouseover = function (event, d) {
+        pcTooltip.style("opacity", 1)
+      }
+
+      var pcMousemove = function (event, d) {
+        pcTooltip
+          .html("Percent Change on " + tooltipFormatTime(d.RecordDate) + " is " + d.PercentChange)
+          .style("left", (event.x) / 2 + "px")
+          .style("top", (event.y) / 2 + "px")
+      }
+
+      var pcMouseleave = function (d) {
+        pcTooltip
+          .transition()
+          .duration(200)
+          .style("opacity", 0)
+      }
+      scene1
+        .append("g")
+        .selectAll("dot")
+        .data(animationData[1].data.filter(function (d, i) {
+          var day = formatTime(d.RecordDate)
+          return (day % 5 == 0)
+        }))
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return x1(d.RecordDate); })
+        .attr("cy", function (d) { return y1(d.PercentChange); })
+        .attr("r", "5")
+        .style("fill", "#69b3a2")
+        .style("opacity", 0.3)
+        .style("stroke", "white")
+        .on("mouseover", pcMouseover)
+        .on("mousemove", pcMousemove)
+        .on("mouseleave", pcMouseleave);
+
+      var acTooltip = d3.select("#div-scene1-ac-tooltip")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+      var acMouseover = function (event, d) {
+        acTooltip.style("opacity", 1)
+      }
+
+      var acMousemove = function (event, d) {
+        acTooltip
+          .html(d.ActiveCaseCount + ": Active Cases on " + tooltipFormatTime(d.RecordDate))
+          .style("left", (event.x) / 2 + 90 + "px")
+          .style("top", (event.y) / 2 + "px")
+      }
+
+      var acMouseleave = function (d) {
+        acTooltip.transition().duration(200).style("opacity", 0)
+      }
+      scene1
+        .append("g")
+        .selectAll("dot")
+        .data(animationData[0].data.filter(function (d, i) {
+          var day = formatTime(d.RecordDate)
+          return (day % 5 == 0)
+        }))
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return x(d.RecordDate); })
+        .attr("cy", function (d) { return y(d.ActiveCaseCount); })
+        .attr("r", "5")
+        .style("fill", "red")
+        .style("opacity", 0.3)
+        .style("stroke", "white")
+        .on("mouseover", acMouseover)
+        .on("mousemove", acMousemove)
+        .on("mouseleave", acMouseleave);
+
+
       var scene1Annotations = [
         {
           note: {
@@ -189,7 +277,7 @@ function renderScene1() {
           x: x(parseTime("2020-09-17")),
           y: y(yValues[0]),
           dx: -47,
-          dy: 40
+          dy: 20
         },
         {
           note: {
