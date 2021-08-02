@@ -13,7 +13,6 @@ function renderScene1() {
 
   // set the ranges
   var x = d3.scaleTime().range([0, width]);
-
   var y = d3.scaleLinear().range([height, 0]);
   var valueLine = d3.line()
     .x(function (d) { return x(d.RecordDate); })
@@ -74,14 +73,6 @@ function renderScene1() {
         .style("text-anchor", "middle")
         .text("Month");
 
-      scene1.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left)
-        .attr("x", 0 - (height / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .text("Number of Active Cases of COVID-19");
-
 
       // Add the ActiveCaseCount Y Axis
       scene1.append("g")
@@ -102,6 +93,34 @@ function renderScene1() {
             "stroke-width": "1px",
             "stroke-dasharray": ("3, 3")
           });
+      scene1.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Number of Active Cases of COVID-19");
+
+      // Add the PercentChange Y1 Axis
+      scene1.append("g")
+        .attr("class", "axisGreen")
+        .attr("transform", "translate( " + width + ", 0 )")
+        .call(d3.axisRight(y1));
+
+      scene1
+        .append("g")
+        .attr("class", "grid")
+        .call(d3.axisLeft(y1).tickSize(-width).tickFormat(""));
+
+      scene1.append("text")
+        .attr("transform", "rotate(270)")
+        .attr("y", width + (margin.right / 2))
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Nifty-50 Index Percent Change");
+
+
       var animationData = [];
       animationData[0] = {
         name: 'ActiveCaseCount',
@@ -150,25 +169,6 @@ function renderScene1() {
         .ease(d3.easeLinear)
         .style("stroke", animationData[1].stroke)
         .attr("stroke-dashoffset", 0);
-
-      // Add the PercentChange Y1 Axis
-      scene1.append("g")
-        .attr("class", "axisGreen")
-        .attr("transform", "translate( " + width + ", 0 )")
-        .call(d3.axisRight(y1));
-
-      scene1
-        .append("g")
-        .attr("class", "grid")
-        .call(d3.axisLeft(y1).tickSize(-width).tickFormat(""));
-
-      scene1.append("text")
-        .attr("transform", "rotate(270)")
-        .attr("y", width + (margin.right / 2))
-        .attr("x", 0 - (height / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .text("Nifty-50 Index Percent Change");
 
       var pcTooltip = d3.select("#div-scene1-pc-tooltip")
         .style("opacity", 0)

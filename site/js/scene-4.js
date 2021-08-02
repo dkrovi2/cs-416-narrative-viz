@@ -175,12 +175,16 @@ function updateGraph(industry, symbol) {
 
   // set the ranges
   var x = d3.scaleTime().range([0, width]);
-
   var y = d3.scaleLinear().range([height, 0]);
   var valueLine = d3.line()
     .x(function (d) { return x(d.RecordDate); })
     .y(function (d) { return y(d.VWAP); });
 
+  var x1 = d3.scaleTime().range([0, width]);
+  var y1 = d3.scaleLinear().range([height, 0]);
+  var valueLine1 = d3.line()
+    .x(function (d) { return x1(d.RecordDate); })
+    .y(function (d) { return y1(d.ActiveCaseCount); });
 
   var scene4 = d3.select("svg#scene-4")
     .attr("width", width + margin.left + margin.right)
@@ -191,144 +195,187 @@ function updateGraph(industry, symbol) {
 
   // Get the data
   d3.csv("data/nifty_top_50_by_industry.csv").then(function (all_data) {
-    var data = []
-    all_data.forEach(function (d) {
-      if (d.Industry === industry && d.Symbol === symbol) {
-        data.push(d)
-      }
-    });
-
-    data.forEach(function (d) {
-      d.RecordDate = parseTime(d.RecordDate);
-      d.VWAP = +d.VWAP;
-    });
-
-    // Scale the range of the data
-    x.domain(d3.extent(data, function (d) { return d.RecordDate; }));
-    y.domain(d3.extent(data, function (d) { return d.VWAP; }));
-
-    // Add the x Axis
-    scene4.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x)
-        .ticks(d3.timeDay.filter(d => d3.timeDay.count(0, d) % 30 === 0))
-        .tickFormat(d3.timeFormat("%b %Y")))
-      .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", ".15em")
-      .attr("transform", "rotate(-65)");
-
-    scene4.append("text")
-      .attr("transform",
-        "translate(" + (width / 2) + " ," +
-        (height + margin.top + 50) + ")")
-      .style("text-anchor", "middle")
-      .text("Month");
-
-    scene4.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left)
-      .attr("x", 0 - (height / 2))
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Volume Weighted Average Price (VWAP)");
-
-    scene4.append("g")
-      .attr("class", "axisGreen")
-      .call(d3.axisLeft(y));
-
-    scene4.append("line")
-      .attr(
-        {
-          "class": "horizontalGrid",
-          "x1": 0,
-          "x2": width,
-          "y1": y(0),
-          "y2": y(0),
-          "fill": "none",
-          "shape-rendering": "crispEdges",
-          "stroke": "black",
-          "stroke-width": "1px",
-          "stroke-dasharray": ("3, 3")
-        });
-    var animationData = [];
-    animationData[0] = {
-      name: 'VWAP',
-      data: data,
-      fn: valueLine,
-      stroke: "#69b3a2"
-    }
-
-    scene4
-      .selectAll(".plot-axis")
-      .data(animationData)
-      .enter().append("g")
-      .attr("class", "plot-axis");
-
-    var path = scene4
-      .selectAll(".plot-axis").append("path")
-      .attr("class", "line")
-      .attr("d", function (d) {
-        return d.fn(d.data);
+    d3.json("data/covid-19-active.json").then(function (data1) {
+      var data = []
+      all_data.forEach(function (d) {
+        if (d.Industry === industry && d.Symbol === symbol) {
+          data.push(d)
+        }
       });
 
-    var totalLength = [
-      path._groups[0][0].getTotalLength()
-    ];
+      data.forEach(function (d) {
+        d.RecordDate = parseTime(d.RecordDate);
+        d.VWAP = +d.VWAP;
+      });
 
-    d3.select(path._groups[0][0])
-      .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
-      .attr("stroke-dashoffset", totalLength[0])
-      .transition()
-      .duration(2000)
-      .ease(d3.easeLinear)
-      .style("stroke", animationData[0].stroke)
-      .attr("stroke-dashoffset", 0);
+      data1.forEach(function (d) {
+        d.RecordDate = parseTime(d.RecordDate);
+        d.ActiveCaseCount = +d.ActiveCaseCount;
+      });
 
-    var formatTime = d3.timeFormat("%d");
-    var tooltipFormatTime = d3.timeFormat("%Y-%m-%d");
+      // Scale the range of the data
+      x.domain(d3.extent(data, function (d) { return d.RecordDate; }));
+      y.domain(d3.extent(data, function (d) { return d.VWAP; }));
 
-    var acTooltip = d3.select("#div-scene4-tooltip")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "1px")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-    var acMouseover = function (event, d) {
-      acTooltip.style("opacity", 1)
-    }
+      x1.domain(d3.extent(data1, function (d) { return d.RecordDate; }));
+      y1.domain([0, d3.max(data1, function (d) { return d.ActiveCaseCount; })]);
 
-    var acMousemove = function (event, d) {
-      acTooltip
-        .html("VWAP on " + tooltipFormatTime(d.RecordDate) + ": " + d.VWAP)
-        .style("left", (event.x) + 2 + "px")
-        .style("top", (event.y) + 2 + "px")
-    }
+      // Add the x Axis
+      scene4.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x)
+          .ticks(d3.timeDay.filter(d => d3.timeDay.count(0, d) % 30 === 0))
+          .tickFormat(d3.timeFormat("%b %Y")))
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
 
-    var acMouseleave = function (d) {
-      acTooltip.transition().duration(200).style("opacity", 0)
-    }
-    scene4
-      .append("g")
-      .selectAll("dot")
-      .data(animationData[0].data.filter(function (d, i) {
-        var day = formatTime(d.RecordDate)
-        return (day % 5 == 0)
-      }))
-      .enter()
-      .append("circle")
-      .attr("cx", function (d) { return x(d.RecordDate); })
-      .attr("cy", function (d) { return y(d.VWAP); })
-      .attr("r", "5")
-      .style("fill", "red")
-      .style("opacity", 0.3)
-      .style("stroke", "white")
-      .on("mouseover", acMouseover)
-      .on("mousemove", acMousemove)
-      .on("mouseleave", acMouseleave);
+      scene4.append("text")
+        .attr("transform",
+          "translate(" + (width / 2) + " ," +
+          (height + margin.top + 50) + ")")
+        .style("text-anchor", "middle")
+        .text("Month");
+
+      scene4.append("g")
+        .attr("class", "axisRed")
+        .call(d3.axisLeft(y1));
+
+      scene4.append("line")
+        .attr(
+          {
+            "class": "horizontalGrid",
+            "x1": 0,
+            "x2": width,
+            "y1": y(0),
+            "y2": y(0),
+            "fill": "none",
+            "shape-rendering": "crispEdges",
+            "stroke": "black",
+            "stroke-width": "1px",
+            "stroke-dasharray": ("3, 3")
+          });
+      scene4.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Number of Active Cases of COVID-19");
+
+      scene4.append("g")
+        .attr("class", "axisGreen")
+        .attr("transform", "translate( " + width + ", 0 )")
+        .call(d3.axisRight(y));
+
+      scene4
+        .append("g")
+        .attr("class", "grid")
+        .call(d3.axisLeft(y1).tickSize(-width).tickFormat(""));
+
+      scene4.append("text")
+        .attr("transform", "rotate(270)")
+        .attr("y", width + (margin.right / 2))
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Volume Weighted Average Price (VWAP)");
+
+      var animationData = [];
+      animationData[0] = {
+        name: 'VWAP',
+        data: data,
+        fn: valueLine,
+        stroke: "#69b3a2"
+      }
+      animationData[1] = {
+        name: 'ActiveCaseCount',
+        data: data1,
+        fn: valueLine1,
+        stroke: "red"
+      }
+
+      scene4
+        .selectAll(".plot-axis")
+        .data(animationData)
+        .enter().append("g")
+        .attr("class", "plot-axis");
+
+      var path = scene4
+        .selectAll(".plot-axis").append("path")
+        .attr("class", "line")
+        .attr("d", function (d) { return d.fn(d.data); });
+
+      var totalLength = [
+        path._groups[0][0].getTotalLength(),
+        path._groups[0][1].getTotalLength()
+      ];
+
+      d3.select(path._groups[0][0])
+        .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
+        .attr("stroke-dashoffset", totalLength[0])
+        .transition()
+        .duration(2000)
+        .ease(d3.easeLinear)
+        .style("stroke", animationData[0].stroke)
+        .attr("stroke-dashoffset", 0);
+        
+      d3.select(path._groups[0][1])
+        .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1])
+        .attr("stroke-dashoffset", totalLength[1])
+        .transition()
+        .duration(3000)
+        .ease(d3.easeLinear)
+        .style("stroke", animationData[1].stroke)
+        .attr("stroke-dashoffset", 0);
+
+
+      var formatTime = d3.timeFormat("%d");
+      var tooltipFormatTime = d3.timeFormat("%Y-%m-%d");
+
+      var acTooltip = d3.select("#div-scene4-tooltip")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+      var acMouseover = function (event, d) {
+        acTooltip.style("opacity", 1)
+      }
+
+      var acMousemove = function (event, d) {
+        acTooltip
+          .html("VWAP on " + tooltipFormatTime(d.RecordDate) + ": " + d.VWAP)
+          .style("left", (event.x) + 2 + "px")
+          .style("top", (event.y) + 2 + "px")
+      }
+
+      var acMouseleave = function (d) {
+        acTooltip.transition().duration(200).style("opacity", 0)
+      }
+      scene4
+        .append("g")
+        .selectAll("dot")
+        .data(animationData[0].data.filter(function (d, i) {
+          var day = formatTime(d.RecordDate)
+          return (day % 5 == 0)
+        }))
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return x(d.RecordDate); })
+        .attr("cy", function (d) { return y(d.VWAP); })
+        .attr("r", "5")
+        .style("fill", "red")
+        .style("opacity", 0.3)
+        .style("stroke", "white")
+        .on("mouseover", acMouseover)
+        .on("mousemove", acMousemove)
+        .on("mouseleave", acMouseleave);
+    });
 
   });
 }
