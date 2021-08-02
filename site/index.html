@@ -63,6 +63,22 @@
       </div>
     </div>
   </nav>
+  <nav aria-label="Scene Navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled" id="page-nav-prev">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&lt;&lt; Previous</a>
+      </li>
+      <li class="page-item disabled" id="page-nav-home">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+          &nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;
+        </a>
+      </li>
+      <li class="page-item" id="page-nav-next">
+        <a class="page-link" href="#">Next &gt;&gt;</a>
+      </li>
+    </ul>
+  </nav>
+
   <div class="container col-xxl-8 px-4 py-5">
     <div id="div-scene-0" style="display: none;">
       <svg id="scene-0"></svg>
@@ -85,9 +101,9 @@
         <div class="col-md-6">
           <label for="labelForIndustries" class="form-label"><b>Industry</b></label>
           <select class="form-control" id="industries">
-            
+
           </select>
-      </div>
+        </div>
         <div class="col-md-6">
           <label for="labelForSymbols" class="form-label"><b>Symbol</b></label>
           <select class="form-control" id="symbols"></select>
@@ -96,21 +112,7 @@
       <svg id="scene-4"></svg>
       <div id="div-scene4-tooltip"></div>
     </div>
-
   </div>
-  <nav aria-label="Scene Navigation">
-    <ul class="pagination justify-content-center">
-      <li class="page-item disabled" id="page-nav-home">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Start</a>
-      </li>
-      <li class="page-item disabled" id="page-nav-prev">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-      </li>
-      <li class="page-item" id="page-nav-next">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav>
   <!-- Modal -->
   <div class="modal fade" id="referencesModal" tabindex="-1" aria-labelledby="referencesModalLabel" aria-hidden="true">
     <div class="modal-dialog">
