@@ -281,7 +281,7 @@ function updateGraph(industry, symbol) {
       .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
       .attr("stroke-dashoffset", totalLength[0])
       .transition()
-      .duration(3000)
+      .duration(2000)
       .ease(d3.easeLinear)
       .style("stroke", animationData[0].stroke)
       .attr("stroke-dashoffset", 0);

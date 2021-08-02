@@ -63,40 +63,97 @@
       </div>
     </div>
   </nav>
-  <nav aria-label="Scene Navigation">
-    <ul class="pagination justify-content-center">
-      <li class="page-item disabled" id="page-nav-prev">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&lt;&lt; Previous</a>
-      </li>
-      <li class="page-item disabled" id="page-nav-home">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-          &nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;
-        </a>
-      </li>
-      <li class="page-item" id="page-nav-next">
-        <a class="page-link" href="#">Next &gt;&gt;</a>
-      </li>
-    </ul>
+  <div class="container col-xxl-10 px-4 py-5">
+    <p class="lead">This story introduces the <b>Nifty Top 50 Index</b>. It lists the stocks that form this index and
+      the various industries these stocks belong to. Then, it goes on to analyze the performance of this Index during
+      the COVID-19 Pandemic in India.</p>
+
+    <blockquote class="blockquote text-center">
+      <footer class="text-secondary">Use the links below to navigate through the story!</footer>
+    </blockquote>
+  </div>
+
+  <nav class="nav nav-pills nav-fill">
+    <a class="nav-item nav-link disabled" id="page-nav-prev" href="#">&lt;&lt; Previous</a>
+    <a class="nav-item nav-link disabled" id="page-nav-home" href="#">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</a>
+    <a class="nav-item nav-link" id="page-nav-next" href="#">Next &gt;&gt;</a>
   </nav>
 
-  <div class="container col-xxl-8 px-4 py-5">
+  <div class="container col-xxl-10 px-4 py-5 bg-light">
     <div id="div-scene-0" style="display: none;">
+      <p>This bar plot shows number of stocks across different industries. The annotations
+        list
+        the Symbols of the stocks in each industry, as comma-separated values.</p>
       <svg id="scene-0"></svg>
     </div>
     <div id="div-scene-1" style="display: none;">
+      <p>
+        <a href="https://www.investopedia.com/terms/v/volatility.asp" target="_blank">Volatility</a> is a statistical
+        measure of the dispersion of returns for a given market index (or security). Higher volatility indicates higher
+        risk.
+        <br>
+        In this line graph with dual axes, we try to find correlation between number of
+        active COVID-19 cases and the Volatility of NIFTY-50 Index:
+      <UL>
+        <LI>the left-axis represents the number of active
+          cases since the first case was detected in India in Feb 2020, till July 2021
+        </LI>
+        <LI>the right-axis represents the volatility of the NIFTY-50 index during this period</LI>
+      </UL>
+      The following observations have been annotated in the graph:
+      <OL>
+        <LI>The shutdown announced in major countries like US, UK affected the Volatility of the index</LI>
+        <LI>During the first and second wave of the COVID-19 pandemic in India, the Volatility of the index was normal!
+        </LI>
+      </OL>
+      </p>
       <svg id="scene-1"></svg>
       <div id="div-scene1-pc-tooltip"></div>
       <div id="div-scene1-ac-tooltip"></div>
     </div>
     <div id="div-scene-2" style="display: none;">
+      <p>
+        <a href="https://www.investopedia.com/terms/p/performance-based-index.asp" target="_blank">Performance-based
+          Index</a> provides investors with a more accurate depiction of the performance to manage risk and position
+        sizing effectively.
+        <br>
+        In this line graph with dual axes, we try to find correlation between number of
+        active COVID-19 cases and the Performance of NIFTY-50 Index:
+      <UL>
+        <LI>the left-axis represents the number of active
+          cases since the first case was detected in India in Feb 2020, till July 2021
+        </LI>
+        <LI>the right-axis represents the Performance of the NIFTY-50 index during this period</LI>
+      </UL>
+      The following observations have been annotated in the graph:
+      <OL>
+        <LI>The Index suffered during the shutdown announced in major countries like US, UK etc.,</LI>
+        <LI>While the Performance of the Index kept improving during the first and second waves, a steep increase has
+          been observed during the recovery between first and second wave!
+        </LI>
+      </OL>
+      </p>
       <svg id="scene-2"></svg>
       <div id="div-scene2-dc-tooltip"></div>
       <div id="div-scene2-ac-tooltip"></div>
     </div>
     <div id="div-scene-3" style="display: none;">
+      <p>
+        In this multi-line graph, the performance of stocks, by Industry, is plotted. This chart allows viewing the
+        trends of each of the Industries, using the selection widget on the right. Hover on the number or
+        colored-rectangle of an Industry to highlight its trend in the chart.
+      </p>
       <svg id="scene-3"></svg>
     </div>
     <div id="div-scene-4" style="display: none;">
+      <p>
+        <a href="https://www.investopedia.com/terms/v/vwap.asp" target=_blank>Volume Weighted Average Price (VWAP)</a>
+        is a trading benchmark that provides traders with insight into both the trend and value of a security.
+        <br>
+        This form allows to drill-down further to understand the VWAP of each Stock in a given industry, during the
+        COVID-19 pandemic. The points on the graph provide the actual values of VWAP at regular intervals in the
+        duration.
+      </p>
       <form class="row g-3">
         <div class="col-md-6">
           <label for="labelForIndustries" class="form-label"><b>Industry</b></label>

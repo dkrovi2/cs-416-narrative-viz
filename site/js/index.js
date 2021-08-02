@@ -12,25 +12,25 @@ function activateLinkNav(linkId) {
 }
 
 function enablePageNav(pageNavId) {
-  d3.select("#page-nav-home").attr("class", "page-item disabled")
-  d3.select("#page-nav-prev").attr("class", "page-item disabled")
-  d3.select("#page-nav-next").attr("class", "page-item disabled")
+  d3.select("#page-nav-home").attr("class", "nav-item nav-link disabled")
+  d3.select("#page-nav-prev").attr("class", "nav-item nav-link disabled")
+  d3.select("#page-nav-next").attr("class", "nav-item nav-link disabled")
 
-  d3.select("#" + pageNavId).attr("class", "page-item")
+  d3.select("#" + pageNavId).attr("class", "nav-item nav-link")
 }
 
 function disablePageNav(pageNavId) {
-  d3.select("#page-nav-home").attr("class", "page-item")
-  d3.select("#page-nav-prev").attr("class", "page-item")
-  d3.select("#page-nav-next").attr("class", "page-item")
+  d3.select("#page-nav-home").attr("class", "nav-item nav-link")
+  d3.select("#page-nav-prev").attr("class", "nav-item nav-link")
+  d3.select("#page-nav-next").attr("class", "nav-item nav-link")
 
-  d3.select("#" + pageNavId).attr("class", "page-item disabled")
+  d3.select("#" + pageNavId).attr("class", "nav-item nav-link disabled")
 }
 
 function enableAllPageNav() {
-  d3.select("#page-nav-home").attr("class", "page-item")
-  d3.select("#page-nav-prev").attr("class", "page-item")
-  d3.select("#page-nav-next").attr("class", "page-item")
+  d3.select("#page-nav-home").attr("class", "nav-item nav-link")
+  d3.select("#page-nav-prev").attr("class", "nav-item nav-link")
+  d3.select("#page-nav-next").attr("class", "nav-item nav-link")
 }
 
 function showScene(sceneId) {
