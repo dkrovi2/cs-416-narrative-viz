@@ -221,8 +221,8 @@ function renderScene2() {
       var dcMousemove = function (event, d) {
         dcTooltip
           .html("Index Close Price on " + tooltipFormatTime(d.RecordDate) + " is " + d.DayClose)
-          .style("left", (event.x) / 2 + 90 + "px")
-          .style("top", (event.y) / 2 + "px")
+          .style("left", (event.x) + "px")
+          .style("top", (event.y) + "px")
       }
 
       var dcMouseleave = function (d) {
@@ -265,8 +265,8 @@ function renderScene2() {
       var acMousemove = function (event, d) {
         acTooltip
           .html(d.ActiveCaseCount + ": Active Cases on " + tooltipFormatTime(d.RecordDate))
-          .style("left", (event.x) / 2 + 90 + "px")
-          .style("top", (event.y) / 2 + "px")
+          .style("left", (event.x) + 2 + "px")
+          .style("top", (event.y) + 2 + "px")
       }
 
       var acMouseleave = function (d) {

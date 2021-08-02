@@ -1,11 +1,12 @@
-var scenes = ["scene-0", "scene-1", "scene-2", "scene-3"];
-var current_scene = 2;
+var scenes = ["scene-0", "scene-1", "scene-2", "scene-3", "scene-4"];
+var current_scene = 0;
 
 function activateLinkNav(linkId) {
   d3.select("#scene-0-link").attr("class", "nav-link")
   d3.select("#scene-1-link").attr("class", "nav-link")
   d3.select("#scene-2-link").attr("class", "nav-link")
   d3.select("#scene-3-link").attr("class", "nav-link")
+  d3.select("#scene-4-link").attr("class", "nav-link")
 
   d3.select("#" + linkId).attr("class", "nav-link active")
 }
@@ -37,12 +38,13 @@ function showScene(sceneId) {
   d3.select("#div-scene-1").style("display", "none")
   d3.select("#div-scene-2").style("display", "none")
   d3.select("#div-scene-3").style("display", "none")
+  d3.select("#div-scene-4").style("display", "none")
 
   d3.select("#div-" + sceneId).style("display", "")
 }
 
 function moveTo(scene) {
-  switch(scene) {
+  switch (scene) {
     case 0:
       activateLinkNav("scene-0-link")
       showScene("scene-0")
@@ -67,11 +69,18 @@ function moveTo(scene) {
     case 3:
       activateLinkNav("scene-3-link")
       showScene("scene-3")
-      disablePageNav("page-nav-next")
+      enableAllPageNav()
       d3.selectAll("#scene-3 > *").remove();
       renderScene3()
       break;
-    }
+    case 4:
+      activateLinkNav("scene-4-link")
+      showScene("scene-4")
+      disablePageNav("page-nav-next")
+      d3.selectAll("#scene-4 > *").remove();
+      renderScene4()
+      break;
+  }
 }
 
 moveTo(current_scene)
@@ -93,6 +102,11 @@ d3.select("#scene-3-link").on("click", function (d) {
   moveTo(current_scene)
 });
 
+d3.select("#scene-4-link").on("click", function (d) {
+  current_scene = 4;
+  moveTo(current_scene)
+});
+
 d3.select("#page-nav-home").on("click", function (d) {
   current_scene = 0;
   moveTo(current_scene)
@@ -103,7 +117,7 @@ d3.select("#page-nav-prev").on("click", function (d) {
     case 1:
       current_scene = 0;
       moveTo(current_scene)
-          break;
+      break;
     case 2:
       current_scene = 1;
       moveTo(current_scene)
@@ -112,7 +126,11 @@ d3.select("#page-nav-prev").on("click", function (d) {
       current_scene = 2;
       moveTo(current_scene)
       break;
-    }
+    case 4:
+      current_scene = 3;
+      moveTo(current_scene)
+      break;
+  }
 });
 
 
@@ -130,6 +148,10 @@ d3.select("#page-nav-next").on("click", function (d) {
       current_scene = 3;
       moveTo(current_scene)
       break;
-    }
+    case 3:
+      current_scene = 4;
+      moveTo(current_scene)
+      break;
+  }
 });
 

@@ -1,292 +1,149 @@
-var industries = [
-  {
-    "Industry": "AUTOMOBILE",
-    "Symbols": [
-      "BAJAJ-AUTO",
-      "EICHERMOT",
-      "HEROMOTOCO",
-      "M&M",
-      "MARUTI",
-      "TATAMOTORS"
-    ]
-  },
-  {
-    "Industry": "CEMENT & CEMENT PRODUCTS",
-    "Symbols": [
-      "GRASIM",
-      "SHREECEM",
-      "ULTRACEMCO"
-    ]
-  },
-  {
-    "Industry": "CONSTRUCTION",
-    "Symbols": ["LT"]
-  },
-  {
-    "Industry": "CONSUMER GOODS",
-    "Symbols": [
-      "ASIANPAINT",
-      "BRITANNIA",
-      "HINDUNILVR",
-      "ITC",
-      "NESTLEIND",
-      "TITAN"
-    ]
-  },
-  {
-    "Industry": "FERTILISERS & PESTICIDES",
-    "Symbols": ["UPL"]
-  },
-  {
-    "Industry": "FINANCIAL SERVICES",
-    "Symbols": [
-      "AXISBANK",
-      "BAJAJFINSV",
-      "BAJFINANCE",
-      "HDFC",
-      "HDFCBANK",
-      "ICICIBANK",
-      "INDUSINDBK",
-      "KOTAKBANK",
-      "SBIN"
-    ]
-  },
-  {
-    "Industry": "IT",
-    "Symbols": [
-      "HCLTECH",
-      "INFY",
-      "TCS",
-      "TECHM",
-      "WIPRO"
-    ]
-  },
-  {
-    "Industry": "MEDIA ENTERTAINMENT & PUBLICATION",
-    "Symbols": ["ZEEL"]
-  },
-  {
-    "Industry": "METALS",
-    "Symbols": [
-      "COALINDIA",
-      "HINDALCO",
-      "JSWSTEEL",
-      "TATASTEEL",
-      "VEDL"
-    ]
-  },
-  {
-    "Industry": "OIL & GAS",
-    "Symbols": [
-      "BPCL",
-      "GAIL",
-      "IOC",
-      "ONGC",
-      "RELIANCE"
-    ]
-  },
-  {
-    "Industry": "PHARMA",
-    "Symbols": [
-      "CIPLA",
-      "DRREDDY",
-      "SUNPHARMA"
-    ]
-  },
-  {
-    "Industry": "POWER",
-    "Symbols": ["NTPC", "POWERGRID"]
-  },
-  {
-    "Industry": "SERVICES",
-    "Symbols": ["ADANIPORTS"]
-  },
-  {
-    "Industry": "TELECOM",
-    "Symbols": ["BHARTIARTL"]
-  }
-]
-
-function renderIndustries() {
-  d3.selectAll("#industries > *").remove();
-  var options = d3.select("#industries").selectAll("option")
-    .data(industries)
-    .enter()
-    .append("option");
-  options.text(function (d) { return d.Industry })
-    .attr("value", function (d) { return d.Industry });
-
-  d3.select("#industries").property("value", "AUTOMOBILE")
-  renderSymbols(d3.select("#industries").property("value"))
-  d3.select("#industries").on("change", function (d) {
-    renderSymbols(d3.select("#industries").property("value"))
-    updateGraph(d3.select("#industries").property("value"),
-      d3.select("#symbols").property("value"))
-  });
-  d3.select("#symbols").on("change", function (d) {
-    updateGraph(d3.select("#industries").property("value"),
-      d3.select("#symbols").property("value"))
-  });
-}
-
-function renderSymbols(industry) {
-  var symbols;
-  industries.forEach(function (d) {
-    if (d.Industry === industry) {
-      symbols = d.Symbols
-    }
-  });
-  d3.selectAll("#symbols > *").remove();
-  var options = d3.select("#symbols").selectAll("option")
-    .data(symbols)
-    .enter()
-    .append("option");
-  options.text(function (d) { return d })
-    .attr("value", function (d) { return d });
-
-  d3.select("#symbols").property("value", symbols[0])
-}
-
-function initScene3() {
-  renderIndustries()
-  updateGraph(d3.select("#industries").property("value"),
-    d3.select("#symbols").property("value"))
-}
-
-function renderScene3() {
-  updateGraph(d3.select("#industries").property("value"),
-    d3.select("#symbols").property("value"))
-}
-
-function updateGraph(industry, symbol) {
-  if (industry == null || industry === '' || symbol == null || symbol === '') {
-    return
-  }
-
-  d3.selectAll("#scene-3 > *").remove();
-  console.log("Updating graph with the data of " + industry + "/" + symbol)
+async function renderScene3() {
   // set the dimensions and margins of the graph
-  var margin = { top: 20, right: 70, bottom: 100, left: 90 },
+  var margin = { top: 20, right: 200, bottom: 100, left: 90 },
     width = 960 - margin.left - margin.right,
     height = 650 - margin.top - margin.bottom;
-  tooltip = { width: 100, height: 100, x: 10, y: -30 };
 
-  // parse the date / time
   var parseTime = d3.timeParse("%Y-%m-%d");
-
-  // set the ranges
-  var x = d3.scaleTime().range([0, width]);
-
-  var y = d3.scaleLinear().range([height, 0]);
-  var valueLine = d3.line()
-    .x(function (d) { return x(d.RecordDate); })
-    .y(function (d) { return y(d.VWAP); });
-
-
-  var scene3 = d3.select("svg#scene-3")
+  var svg = d3.select("#scene-3")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform",
       "translate(" + margin.left + "," + margin.top + ")");
 
-  // Get the data
-  d3.csv("data/nifty_top_50_by_industry.csv").then(function (all_data) {
-    var data = []
-    all_data.forEach(function (d) {
-      if (d.Industry === industry && d.Symbol === symbol) {
-        data.push(d)
-      }
-    });
+  const keys = ["AUTOMOBILE", "CEMENT_CEMENT_PRODUCTS", "CONSTRUCTION",
+    "CONSUMER_GOODS", "FERTILISERS_PESTICIDES", "FINANCIAL_SERVICES",
+    "INFOTECH", "MEDIA_ENTERTAINMENT_PUBLICATION", "METALS",
+    "OIL_GAS", "PHARMA", "POWER",
+    "SERVICES", "TELECOM"]
 
+  const industry_to_key_map = {
+    "AUTOMOBILE": "AUTOMOBILE",
+    "CEMENT & CEMENT PRODUCTS": "CEMENT_CEMENT_PRODUCTS",
+    "CONSTRUCTION": "CONSTRUCTION",
+    "CONSUMER GOODS": "CONSUMER_GOODS",
+    "FERTILISERS & PESTICIDES": "FERTILISERS_PESTICIDES",
+    "FINANCIAL SERVICES": "FINANCIAL_SERVICES",
+    "IT": "INFOTECH",
+    "MEDIA ENTERTAINMENT & PUBLICATION": "MEDIA_ENTERTAINMENT_PUBLICATION",
+    "METALS": "METALS",
+    "OIL & GAS": "OIL_GAS",
+    "PHARMA": "PHARMA",
+    "POWER": "POWER",
+    "SERVICES": "SERVICES",
+    "TELECOM": "TELECOM"
+  }
+
+  var csvFile = "data/nifty_50_industry_perf.csv"
+  d3.csv(csvFile).then(function (data) {
     data.forEach(function (d) {
       d.RecordDate = parseTime(d.RecordDate);
-      d.VWAP = +d.VWAP;
+      // d.DayClose = Math.log(d.DayClose)
     });
 
-    // Scale the range of the data
-    x.domain(d3.extent(data, function (d) { return d.RecordDate; }));
-    y.domain(d3.extent(data, function (d) { return d.VWAP; }));
+    const sumstat = d3.group(data, d => d.Industry);
+    const color =
+      //d3.scaleOrdinal().domain(keys).range(d3.schemeSet3);
+      d3
+        .scaleOrdinal()
+        .domain(keys)
+        .range(["MediumSlateBlue", "DarkSlateBlue", "SlateBlue", "Indigo", "Purple", "DarkMagenta", "DarkOrchid",
+          "DarkViolet", "BlueViolet", "RebeccaPurple", "MediumPurple", "Magenta", "MediumOrchid", "Orchid"])
 
-    // Add the x Axis
-    scene3.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x)
-        .ticks(d3.timeDay.filter(d => d3.timeDay.count(0, d) % 30 === 0))
-        .tickFormat(d3.timeFormat("%b %Y")))
-      .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", ".15em")
-      .attr("transform", "rotate(-65)");
-
-    scene3.append("text")
+    // Add X axis
+    const x =
+      d3.scaleTime()
+        .domain(d3.extent(data, function (d) { return d.RecordDate; }))
+        .range([0, width]);
+    const xAxis =
+      svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x)
+          .ticks(d3.timeDay.filter(d => d3.timeDay.count(0, d) % 30 === 0))
+          .tickFormat(d3.timeFormat("%b %Y")))
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
+    svg.append("text")
       .attr("transform",
         "translate(" + (width / 2) + " ," +
         (height + margin.top + 50) + ")")
       .style("text-anchor", "middle")
-      .text("Month");
+      .text("Date");
 
-    scene3.append("text")
+
+    // Add Y axis
+    const y =
+      d3.scaleLinear()
+        .domain([0, d3.max(data, function (d) { return +d.DayClose; })])
+        .range([height, 0]);
+    svg.append("g")
+      .call(d3.axisLeft(y).ticks(15))
+    svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Volume Weighted Average Price (VWAP)");
+      .text("Price Movement");
 
-    scene3.append("g")
-      .attr("class", "axisGreen")
-      .call(d3.axisLeft(y));
+    svg.selectAll(".line")
+      .data(sumstat)
+      .join("path")
+      .attr("fill", "none")
+      .attr("class", function (d) { return "myArea s3-" + industry_to_key_map[d[0]] })
+      .attr("stroke", function (d) {
+        return color(d[0]);
+      })
+      .attr("stroke-width", 2)
+      .attr("d", function (d) {
+        return d3.line()
+          .x(function (d) { return x(d.RecordDate); })
+          .y(function (d) { return y(+d.DayClose); })
+          (d[1])
+      })
 
-    scene3.append("line")
-      .attr(
-        {
-          "class": "horizontalGrid",
-          "x1": 0,
-          "x2": width,
-          "y1": y(0),
-          "y2": y(0),
-          "fill": "none",
-          "shape-rendering": "crispEdges",
-          "stroke": "black",
-          "stroke-width": "1px",
-          "stroke-dasharray": ("3, 3")
-        });
-    var animationData = [];
-    animationData[0] = {
-      name: 'VWAP',
-      data: data,
-      fn: valueLine,
-      stroke: "#69b3a2"
+    let idleTimeout
+    function idled() { idleTimeout = null; }
+
+    const highlight = function (event, d) {
+      d3.selectAll(".myArea").style("opacity", .05)
+      d3.select(".s3-" + d).style("opacity", 2)
     }
 
-    scene3
-      .selectAll(".plot-axis")
-      .data(animationData)
-      .enter().append("g")
-      .attr("class", "plot-axis");
+    const noHighlight = function (event, d) {
+      d3.selectAll(".myArea").style("opacity", 2)
+    }
+    // Add one dot in the legend for each name.
+    const size = 15
+    const legendX = 690
+    svg.selectAll("myrect")
+      .data(keys)
+      .join("rect")
+      .attr("x", legendX)
+      .attr("y", function (d, i) { return 10 + i * (size + 5) })
+      .attr("width", size)
+      .attr("height", size)
+      .style("fill", function (d) { return color(d) })
+      .on("mouseover", highlight)
+      .on("mouseleave", noHighlight)
 
-    var path = scene3
-      .selectAll(".plot-axis").append("path")
-      .attr("class", "line")
-      .attr("d", function (d) {
-        return d.fn(d.data);
-      });
+    // Add one dot in the legend for each name.
+    svg.selectAll("mylabels")
+      .data(keys)
+      .join("text")
+      .attr("x", legendX + size * 1.2)
+      .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) })
+      .style("fill", function (d) { return color(d) })
+      .text(function (d) { return d })
+      .attr("text-anchor", "left")
+      .style("alignment-baseline", "middle")
+      .style("font-size", "50%")
+      .on("mouseover", highlight)
+      .on("mouseleave", noHighlight)
 
-    var totalLength = [
-      path._groups[0][0].getTotalLength()
-    ];
-
-    d3.select(path._groups[0][0])
-      .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0])
-      .attr("stroke-dashoffset", totalLength[0])
-      .transition()
-      .duration(3000)
-      .ease(d3.easeLinear)
-      .style("stroke", animationData[0].stroke)
-      .attr("stroke-dashoffset", 0);
-
-  });
+  })
 }
-
