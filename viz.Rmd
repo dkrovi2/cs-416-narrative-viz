@@ -1,0 +1,33 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+install.packages("plotly")
+```
+
+
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+
+```{r}
+ind_c19_data = read.csv("./cs-416-narrative-viz/raw-dataset/covid-19-dataset/covid_19_india.csv")
+```
+
+```{r}
+str(ind_c19_data)
+
+```
+
+```{r}
+ind_c19_data$MyDate = lubridate::ymd(ind_c19_data$Date)
+```
+
+```{r}
+hist(ind_c19_data$MyDate, ind_c19_data$ConfirmedIndianNational, breaks=50)
+```
+
